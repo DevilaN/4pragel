@@ -3,10 +3,10 @@
 using namespace std;
 
 
-/** Procedura wypisujaca zawartosc pliku */
+/** Dlaczego to sie nazywa wypisz skoro tak naprawde zapisuje liczby do pliku? */
 void wypisz(const char* fileName);
 
-/** Procedura mnozaca plik? */
+/** Procedura mnozaca plik? Wyglada jakby to ona wypisywala znaki z pliku */
 void mnoz(const char* fileName);
 
 
@@ -61,6 +61,6 @@ void mnoz(const char* fileName)
 			cout << linia << endl;
 		}
 	} else {
-		cout << "BLAD: nie mozna otworzyc pliku do odczytu." << endl;
+		cout << "BLAD: nie mozna otworzyc pliku do odczytu." << endl;	// Tu powinno być cerr skoro wypisujesz BLAD!
 	}
 }
