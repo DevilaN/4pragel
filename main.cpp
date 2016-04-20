@@ -4,10 +4,10 @@ using namespace std;
 
 
 /** Procedura wypisujaca zawartosc pliku */
-void wypisz();
+void wypisz(const char* fileName);
 
 /** Procedura mnozaca plik? */
-void mnoz();
+void mnoz(const char* fileName);
 
 
 /**
@@ -17,45 +17,50 @@ void mnoz();
 */
 int main(int argc, char* argv[])
 {
-	wypisz();
-	mnoz();
-	
+	/* Jesli podano parametr, to traktuj go jako nazwe pliku, w przeciwnym wypadku domyslna nazwa pliku to add.txt */
+	const char* fileName = (argc == 2 ? argv[1] : "add.txt");
+	wypisz(fileName);
+	mnoz(fileName);
+
+	// Dawid! Po co te dwie linijki ponizej? To nic nie robi!
 	ofstream plik;
-	plik.open("add.txt",ios::app);
+	plik.open("add.txt", ios::app);
+
 	return 0;
 }
 
 
 
 
-void wypisz()
+/**
+ * @param char* fileName Nazwa pliku, ktory ma zostac przetworzony
+ */
+void wypisz(const char* fileName)
 {
 	ofstream plik;
-	plik.open("add.txt",ios::app);
-	if (!plik.good())
-			cerr << "blad otwarcia pliku!";
-		else{
-		for(int i = 0; i < 100; i++){
-			plik << i+1 << endl;
-			}
-	plik.close();
+	plik.open(fileName, ios::app);
+	if (!plik.good()) {
+		cerr << "blad otwarcia pliku!";
+	} else {
+		for(int i = 0; i < 100; i++) {
+			plik << (i + 1) << endl;
+		}
+		plik.close();
 	}
 }
 
-void mnoz()
+/**
+ * @param char* fileName Nazwa pliku, ktory ma zostac przetworzony
+ */
+void mnoz(const char* fileName)
 {
-
-	ifstream plik("add.txt");
- 	if(plik)
-	{
-	  	string linia;	 
- 		while(getline(plik, linia))	
-		{
-			cout << linia << endl;						  
+	ifstream plik(fileName);
+	if (plik) {
+		string linia;
+		while (getline(plik, linia)) {
+			cout << linia << endl;
 		}
-	}
-	else
-	{
-		cout << "B£¥D: nie mo¿na otworzyæ pliku do odczytu." << endl;
+	} else {
+		cout << "BLAD: nie mozna otworzyc pliku do odczytu." << endl;
 	}
 }
